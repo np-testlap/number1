@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		html,body{
+			width:100%;
+			height:100%;
+			overflow: hidden;
+			margin:0;
+		}
+		#particles{
+			width:100%;
+			height:100%;
+			overflow: hidden;
+			background-color: white;
+		}
+		#inner{
+			position:absolute;
+			top:0;
+			left:0;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/jquery.particleground.min.js"></script>
+	<script>
+	$(function(){
+		var settings = {
+			dotColor:"gray",
+			lineColor:"gray",
+			particleRadius:10,
+			density:15000
+		}
+		$('#particles').particleground(settings);
+	})
+	</script>
+</head>
+<body>
+<div id="particles">
+	<div id="inner">
+		<h1>Particle Sample</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut placeat nisi ea ipsa esse nihil magnam. Enim, unde saepe corporis eius rerum explicabo sapiente excepturi perferendis asperiores esse nisi eveniet.</p>
+		</div>
+	</div>
+</body>
+</html>
