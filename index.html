@@ -1,14 +1,266 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="style1.css">
-</head>
-<body>
-    <h1>Hello World</h1>
-    <p>This is sample page</p>
-</body>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <title>Hello, world!</title>
+
+        <style>
+            .pre-color{
+                background-color:#f2f2f2;
+                /* background-color: #344;
+                color: white; */
+            }
+
+            .pre-color-after{
+                background-color: white;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <!-- As a link -->
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">AI with Python</a>
+        </nav>
+
+        <div class="container">
+            <!-- Content here -->
+            <p></p>
+            <h1>Hello, World!</h1>
+            <p></p>
+
+            <p>
+                プログラムを本格的に学び始めて、3ヵ月が経ちました。HTML,CSS,Python等の基本的な使い方が分かり、少しは使えるようになったので、ウェブサイトを作成し、Kaggleのタイタニック号の生存者予測に挑戦した内容を記したいと思います。以下のプログラミング言語を学んでいます。
+            </p>
+
+            <a class="btn btn-primary" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" role="button">HTML</a>
+
+            <a class="btn btn-secondary" href="https://ja.wikipedia.org/wiki/CSS" role="button">CSS</a>
+
+            <a class="btn btn-success" href="https://ja.wikipedia.org/wiki/Python" role="button">Python</a>
+
+            <a class="btn btn-danger" href="https://ja.wikipedia.org/wiki/JavaScript" role="button">JavaScript</a>
+
+            <a class="btn btn-warning" href="https://ja.wikipedia.org/wiki/JQuery" role="button">jQuery</a>
+
+            <p></p>
+            <p>
+                ちなみにKaggleは、企業や研究者がデータを投稿し、世界中の統計家やデータ分析家がその最適モデルを競い合う、予測モデリング及びに分析手法関連のプラットフォームです。
+            </p>
+
+            <div class="card" style="width: auto;">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
+                <div class="card-body">
+                  <h5 class="card-title">タイタニック号で生き残る人を予測する！</h5>
+                  <p class="card-text">Kaggleの中でも有名な課題「タイタニック号：災害からの機械学習」は、初心者向けです。実際のデータを使い、機械学習で予測を作り競います。</p>
+                  <a href="https://www.kaggle.com/c/titanic" class="btn btn-primary">Go Kaggle Titanic : Machine Learning from Disaster</a>
+                </div>
+            </div>
+
+            <p></p>
+
+            <p>それでは、始めます（詳細は省略し、実際の作業の流れを主に記します）。</p>
+            <br>
+            <p>まず、データセットを確認し「train.csv （59.76 KB）、test.csv（27.96 KB）」、csvファイルを読み込みます。</p>
+
+            <pre class="pre-color"><code>
+            titanic_train = pd.read_csv('train.csv')
+            titanic_test = pd.read_csv('test.csv')
+            </code></pre>
+            <br>
+            <p>次は、trainデータとtestデータの行列と欠損値を確認します。</p>
+            <pre class="pre-color"><code>
+            print('データの形式:{}'.format(titanic_train.shape))
+            print('データの形式:{}'.format(titanic_test.shape))
+            print('欠損の数:{}'.format(titanic_train.isnull().sum().sum()))
+            print('欠損の数:{}'.format(titanic_test.isnull().sum().sum()))
+            </code></pre>
+            <pre class="pre-color-after"><code>
+            データの形式:(891, 12)
+            データの形式:(418, 11)
+            欠損の数:866
+            欠損の数:414
+            </code></pre>
+            <p>それぞれ、欠損値があることを確認したのでデータの前処理をします。まず、trainデータのNaNを確認します。</p>
+            <pre class="pre-color"><code>
+            titanic_train.isnull().sum()
+            </code></pre>
+            <pre class="pre-color-after"><code>
+            PassengerId      0
+            Survived         0
+            Pclass           0
+            Name             0
+            Sex              0
+            Age            177
+            SibSp            0
+            Parch            0
+            Ticket           0
+            Fare             0
+            Cabin          687
+            Embarked         2
+            dtype: int64                
+            </code></pre>
+            <p>Age、Cabin、Embarkedに欠損値があるのを確認しました。欠損値の処理は、平均値、中央値、最頻値などを使い、埋める方法などもあるが、何らかの形で補うよりも削除してしまう方がより良いスコアを残すので、削除します。</p>
+            <pre class="pre-color"><code>
+            # 'Age'列にNaNがある行を削除する
+            titanic_train.dropna(subset=['Age'], axis=0, inplace=True)
+            print(titanic_train.shape)
+            </code></pre>
+            <pre class="pre-color-after"><code>
+            (712, 12)
+            </code></pre>
+            <pre class="pre-color"><code>
+            # 'Embarked'列にNaNがある行を削除する
+            titanic_train.dropna(subset=['Embarked'], axis=0, inplace=True)
+            print(titanic_train.shape)
+            </code></pre>
+            <pre class="pre-color-after"><code>
+            (889, 12)
+            </code></pre>
+            <p>Cabinは、Cabin numberであり、Cabin numberのみでは欠損値が非常に多く、削除するにも数字化するにもダミー変数化するにも誤差が大きくなりそうで、使い道に困る説明変数です。ここでは、Cabinのデータを単純化し、番号ありとなしの二つに分ける方法を取ります。</p>
+            <pre class="pre-color"><code>
+            # 'Cabin'列にNaNがある行を0にする
+            titanic_train['Cabin'].fillna(0, inplace=True)
+            print(titanic_train.shape)
+            </code></pre>
+            <pre class="pre-color-after"><code>
+            (712, 12)
+            </code></pre>
+            <pre class="pre-color"><code>
+            # 'Cabin'列の0以外ののもを全て1にする
+            titanic_train['Cabin'] = titanic_train['Cabin'].map(lambda x : 1 if x != 0 else 0)
+            titanic_train['Cabin'].head()
+            </code></pre>
+            <pre class="pre-color-after"><code>
+            0    0
+            1    1
+            2    0
+            3    1
+            4    0
+            Name: Cabin, dtype: int64
+            </code></pre>
+            <p>これでtrainデータの欠損値の前処理は終わりました。NaNがないことを確認します。</p>
+            <pre class="pre-color"><code>
+            titanic_train.isnull().sum()
+            </code></pre>
+            <pre class="pre-color-after"><code>
+            PassengerId    0
+            Survived       0
+            Pclass         0
+            Name           0
+            Sex            0
+            Age            0
+            SibSp          0
+            Parch          0
+            Ticket         0
+            Fare           0
+            Cabin          0
+            Embarked       0
+            dtype: int64
+            </code></pre>
+            <p>trainデータの総合情報を確認し、説明変数で使う項目を決めます。</p>
+            <pre class="pre-color"><code>
+            titanic_train.info()
+            </code></pre>
+            <pre class="pre-color-after"><code>
+            class 'pandas.core.frame.DataFrame'
+            Int64Index: 712 entries, 0 to 890
+            Data columns (total 12 columns):
+            PassengerId    712 non-null int64
+            Survived       712 non-null int64
+            Pclass         712 non-null int64
+            Name           712 non-null object
+            Sex            712 non-null object
+            Age            712 non-null float64
+            SibSp          712 non-null int64
+            Parch          712 non-null int64
+            Ticket         712 non-null object
+            Fare           712 non-null float64
+            Cabin          712 non-null int64
+            Embarked       712 non-null object
+            dtypes: float64(2), int64(6), object(4)
+            memory usage: 72.3+ KB
+            </code></pre>
+            <pre class="pre-color"><code>
+            # PassengerId,Survived(目的変数),Name,Ticket以外の説明変数を全て、ダミー変数に変換。
+            trainX = pd.get_dummies(titanic_train[['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Cabin', 'Embarked']])
+            </code></pre>
+            <p>ダミー変数は、デフォルトで数字はそのままで、オブジェクトのみダミー変数化される。</p>
+            <pre class="pre-color"><code>
+            # Survivedを目的変数に設定する。
+            y = titanic_train['Survived']
+            </code></pre>
+            <br>
+            <p>いよいよ機械学習モデルに説明変数を入れ、結果の予想スコアを確認します。</p>
+            <pre class="pre-color"><code>
+            # 必要なライブラリの読み込み。
+            from sklearn.neighbors import KNeighborsClassifier
+            from sklearn.tree import DecisionTreeClassifier
+            from sklearn.linear_model import LogisticRegression
+            from sklearn.svm import LinearSVC, SVC
+            from sklearn.preprocessing import StandardScaler
+            from sklearn.model_selection import train_test_split
+            
+            # stratify=yを指定することにより、偏りが避けられ、均等に0,1が振り分けられるので機械学習の精度が上がる。
+            X_train, X_test, y_train, y_test = train_test_split(trainX, y, stratify = y, random_state = 0)
+            
+            # 標準化（サポートベクターマシンでは、標準化するとスコアが改善されることがある(231p)。
+            sc = StandardScaler()
+            sc.fit(X_train)
+            X_train_std = sc.transform(X_train)
+            X_test_std = sc.transform(X_test)
+            
+            # 複数のモデルの設定
+            models = {
+                'knn' : KNeighborsClassifier(),
+                'tree' : DecisionTreeClassifier(random_state = 0),
+                'logistic' : LogisticRegression(random_state = 0),
+                'svc1' : LinearSVC(random_state = 0),
+                'svc2' : SVC(random_state = 0)
+            }
+            
+            # スコアを持つための空の辞書データ
+            scores = {}
+            
+            # モデルごとにスコア算出
+            for model_name, model in models.items():
+                model.fit(X_train_std, y_train)
+                scores[(model_name, 'train')] = model.score(X_train_std, y_train)
+                scores[(model_name, 'test')] = model.score(X_test_std, y_test)
+            
+            # それぞれのスコア結果表示
+            pd.Series(scores).unstack()
+            </code></pre>
+            <pre class="pre-color-after"><code>
+                        test	       train
+              knn	0.831461	0.835206
+              logistic	0.842697	0.788390
+              svc1	0.842697	0.784644
+              svc2	0.842697	0.818352
+              tree	0.758427	0.990637
+            </code></pre>
+            <p>svc2がtrain、test共に一番良いスコアを出していることが分かります。ハイパーパラメータの調整により、スコアの改善が図れますが、Kaggleにアップロードすると必ずしもスコアの改善が認められるわけではなく、上下が比例しない場合が多いので、基準が掴みにくいです。</p>
+            <p>一番良いスコアを出しているsvc2を使い、testデータの予測値を出すため、testデータの前処理をします。trainデータとは違い、欠損値があるからといっても削除はできないので、何らかの形で欠損値を埋める必要があります。今回は、'Age'列と'Fare'列にNaNがある行を平均値で埋め、'Cabin'列のデータは単純化し、番号ありとなしの二つに分ける方法を取ります。作業内容はtrainデータの時とほぼ同じなので、省略します。</p>
+
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    </body>
+
 </html>
