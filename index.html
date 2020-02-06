@@ -8,7 +8,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-        <title>Hello, world!</title>
+        <title>タイタニック号で生き残る人を予測する！</title>
 
         <style>
             .pre-color{
@@ -16,11 +16,9 @@
                 /* background-color: #344;
                 color: white; */
             }
-
             .pre-color-after{
                 background-color: white;
             }
-
         </style>
 
     </head>
@@ -32,42 +30,115 @@
             <a class="navbar-brand" href="#">AI with Python</a>
         </nav>
 
-        <div class="container">
+        <div class="container" style="max-width: 800px;">
             <!-- Content here -->
             <p></p>
-            <h1>Hello, World!</h1>
+            <h1>タイタニック号で生き残る人を予測する！</h1>
             <p></p>
 
             <p>
-                プログラムを本格的に学び始めて、3ヵ月が経ちました。HTML,CSS,Python等の基本的な使い方が分かり、少しは使えるようになったので、ウェブサイトを作成し、Kaggleのタイタニック号の生存者予測に挑戦した内容を記したいと思います。以下のプログラミング言語を学んでいます。
+                プログラムを本格的に学び始めて、3ヵ月が経ちました。HTML,CSS,Python等の基本的な使い方が分かり、少しは使えるようになったので、ウェブサイトを作成し、Kaggleのタイタニック号の生存者予測に挑戦した内容を記したいと思います。
             </p>
-
-            <a class="btn btn-primary" href="https://ja.wikipedia.org/wiki/HyperText_Markup_Language" role="button">HTML</a>
-
-            <a class="btn btn-secondary" href="https://ja.wikipedia.org/wiki/CSS" role="button">CSS</a>
-
-            <a class="btn btn-success" href="https://ja.wikipedia.org/wiki/Python" role="button">Python</a>
-
-            <a class="btn btn-danger" href="https://ja.wikipedia.org/wiki/JavaScript" role="button">JavaScript</a>
-
-            <a class="btn btn-warning" href="https://ja.wikipedia.org/wiki/JQuery" role="button">jQuery</a>
-
-            <p></p>
             <p>
                 ちなみにKaggleは、企業や研究者がデータを投稿し、世界中の統計家やデータ分析家がその最適モデルを競い合う、予測モデリング及びに分析手法関連のプラットフォームです。
             </p>
 
             <div class="card" style="width: auto;">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect fill="#868e96" width="100%" height="100%"/><text fill="#dee2e6" dy=".3em" x="50%" y="50%">Image cap</text></svg>
+                <img src="https://storage.googleapis.com/kaggle-competitions/kaggle/3136/logos/header.png" class="card-img-top" alt="titanic.png">
                 <div class="card-body">
                   <h5 class="card-title">タイタニック号で生き残る人を予測する！</h5>
                   <p class="card-text">Kaggleの中でも有名な課題「タイタニック号：災害からの機械学習」は、初心者向けです。実際のデータを使い、機械学習で予測を作り競います。</p>
-                  <a href="https://www.kaggle.com/c/titanic" class="btn btn-primary">Go Kaggle Titanic : Machine Learning from Disaster</a>
+                  <a href="https://www.kaggle.com/c/titanic" target="_blank" class="btn btn-primary">Go Kaggle Titanic : Machine Learning from Disaster</a>
                 </div>
             </div>
 
             <p></p>
+            <br>
 
+            <h2>データの概要</h2>
+            <br>
+
+            <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Variable(変数)</th>
+                    <th scope="col">Definition(定義)</th>
+                    <th scope="col">Key(キー)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>survival</td>
+                    <td>survival(生存)</td>
+                    <td>0 = No(生き残らない), 1 = Yes(生き残る)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>pclass</td>
+                    <td>Ticket class(チケットクラス)</td>
+                    <td>1 = 1st(ファーストクラス), 2 = 2nd,(セカンドクラス) 3 = 3rd(サードクラス)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>sex</td>
+                    <td>Sex(性別)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>Age</td>
+                    <td>Age in years(年齢)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>sibsp</td>
+                    <td># of siblings / spouses aboard the Titanic(兄弟 / 乗船した配偶者)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td>parch</td>
+                    <td># of parents / children aboard the Titanic(親 / 乗船した子供)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
+                    <td>ticket</td>
+                    <td>Ticket number(チケット番号)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
+                    <td>fare</td>
+                    <td>Passenger fare(運賃)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">9</th>
+                    <td>cabin</td>
+                    <td>Cabin number(船室番号)</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">10</th>
+                    <td>embarked</td>
+                    <td>Port of Embarkation(乗船港)</td>
+                    <td>C = Cherbourg(シェルブール), Q = Queenstown(クイーンズタウン
+                        ), S = Southampton(サウサンプトン)</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            
+            <p>与えられるデータは、以上の10個の変数になります。survival（生存するか否か）を目的変数に設定し、残りの9個の変数を説明変数として使い、如何に正しく予測するのかが課題になります。</p>
+
+            <p>まずは、説明変数を確認し、生存率に影響しそうな変数を割り出します。pclass、sex、age、cabin、</p>
+
+            <p></p>
+            
             <p>それでは、始めます（詳細は省略し、実際の作業の流れを主に記します）。</p>
             <br>
             <p>まず、データセットを確認し「train.csv （59.76 KB）、test.csv（27.96 KB）」、csvファイルを読み込みます。</p>
@@ -250,6 +321,209 @@
             </code></pre>
             <p>svc2がtrain、test共に一番良いスコアを出していることが分かります。ハイパーパラメータの調整により、スコアの改善が図れますが、Kaggleにアップロードすると必ずしもスコアの改善が認められるわけではなく、上下が比例しない場合が多いので、基準が掴みにくいです。</p>
             <p>一番良いスコアを出しているsvc2を使い、testデータの予測値を出すため、testデータの前処理をします。trainデータとは違い、欠損値があるからといっても削除はできないので、何らかの形で欠損値を埋める必要があります。今回は、'Age'列と'Fare'列にNaNがある行を平均値で埋め、'Cabin'列のデータは単純化し、番号ありとなしの二つに分ける方法を取ります。作業内容はtrainデータの時とほぼ同じなので、省略します。</p>
+            <pre class="pre-color"><code>
+            # testデータのNaNを確認する。
+            titanic_test.isnull().sum()
+            </pre></code>
+            <pre class="pre-color-after"><code>
+                PassengerId      0
+                Pclass           0
+                Name             0
+                Sex              0
+                Age             86
+                SibSp            0
+                Parch            0
+                Ticket           0
+                Fare             1
+                Cabin          327
+                Embarked         0
+                dtype: int64
+            </pre></code>
+            <pre class="pre-color"><code>
+            # Ageの要約統計量を確認する。
+            titanic_test['Age'].describe()
+            </pre></code>
+            <pre class="pre-color-after"><code>
+                count    332.000000
+                mean      30.272590
+                std       14.181209
+                min        0.170000
+                25%       21.000000
+                50%       27.000000
+                75%       39.000000
+                max       76.000000
+                Name: Age, dtype: float64
+            </pre></code>
+            <pre class="pre-color"><code>
+            # 'Age'列にNaNがある行を平均値で埋める。
+            titanic_test.fillna(30, inplace=True)
+            print(titanic_test.shape)
+            </pre></code>
+            <pre class="pre-color-after"><code>
+                (418, 11)
+            </pre></code>
+            <pre class="pre-color"><code>
+            # 'Cabin'列にNaNがある行を0にする
+            titanic_test['Cabin'].fillna(0, inplace=True)
+            print(titanic_test.shape)
+            </pre></code>
+            <pre class="pre-color-after"><code>
+                (418, 11)
+            </pre></code>
+            <pre class="pre-color"><code>
+            # 'Cabin'列の0以外ののもを全て1にする
+            titanic_test['Cabin'] = titanic_test['Cabin'].map(lambda x : 1 if x != 0 else 0)
+            </pre></code>
+            <pre class="pre-color"><code>
+            # Fareの要約統計量を確認する。
+            titanic_test['Fare'].describe()
+            </pre></code>
+            <pre class="pre-color-after"><code>
+                count    418.000000
+                mean      35.613726
+                std       55.841179
+                min        0.000000
+                25%        7.895800
+                50%       14.454200
+                75%       31.471875
+                max      512.329200
+                Name: Fare, dtype: float64
+            </pre></code>
+            <pre class="pre-color"><code>
+            # 'Fare'列にNaNがある行を平均値で埋める。
+            titanic_test.fillna(36, inplace=True)
+            print(titanic_test.shape)
+            </pre></code>
+            <pre class="pre-color-after"><code>
+                (418, 11)
+            </pre></code>
+            <pre class="pre-color"><code>
+            # PassengerId,Name,Ticket以外の説明辺巣を全て、ダミー変数に変換(デフォルトでは数字はそのままで、オブジェクトのみダミー変数化される)。
+            testX = pd.get_dummies(titanic_test[['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Cabin', 'Embarked']])
+            </pre></code>
+            <pre class="pre-color"><code>
+            # Survivedを目的変数に設定する。
+            y = titanic_train['Survived']
+            </pre></code>
+            <pre class="pre-color"><code>
+            # 必要なライブラリの読み込み。
+            from sklearn.neighbors import KNeighborsClassifier
+            from sklearn.tree import DecisionTreeClassifier
+            from sklearn.linear_model import LogisticRegression
+            from sklearn.svm import LinearSVC, SVC
+            from sklearn.preprocessing import StandardScaler
+            from sklearn.model_selection import train_test_split
+            from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+            
+            # stratify=yを指定することにより、偏りが避けられ、均等に0,1が振り分けられるので機械学習の精度が上がる。
+            X_train, X_test, y_train, y_test = train_test_split(trainX, y, stratify = y, random_state = 0)
+            
+            # 標準化（サポートベクターマシンでは、標準化するとスコアが改善されることがある(231p)。
+            sc = StandardScaler()
+            sc.fit(X_train)
+            X_train_std = sc.transform(X_train)
+            X_test_std = sc.transform(X_test)
+            
+            # 複数のモデルの設定
+            models = {
+                'knn' : KNeighborsClassifier(),
+                'tree' : DecisionTreeClassifier(random_state = 0),
+                'logistic' : LogisticRegression(random_state = 0),
+                'svc1' : LinearSVC(random_state = 0),
+                'svc2' : SVC(random_state = 0),
+                'RandomForest': RandomForestClassifier(random_state=0)
+            }
+            
+            # スコアを持つための空の辞書データ
+            scores = {}
+            
+            # モデルごとにスコア算出
+            for model_name, model in models.items():
+                model.fit(X_train_std, y_train)
+                scores[(model_name, 'train')] = model.score(X_train_std, y_train)
+                scores[(model_name, 'test')] = model.score(X_test_std, y_test)
+            
+            # それぞれのスコア結果表示
+            pd.Series(scores).unstack()
+            </pre></code>
+            <pre class="pre-color-after"><code>
+                                test	    train
+                RandomForest	0.820225	0.970037
+                knn	        0.831461	0.835206
+                logistic	0.842697	0.788390
+                svc1	        0.842697	0.784644
+                svc2	        0.842697	0.818352
+                tree	        0.758427	0.990637
+            </pre></code>
+            <pre class="pre-color"><code>
+            # 標準化(テスト用のデータも標準化して整合性を整える)
+            sc = StandardScaler()
+            sc.fit(testX)
+            X_test_std = sc.transform(testX)
+            
+            # train,test共に一番高いスコアを出しているsvc2(SVC)を使い予測する。 
+            prediction = models['svc2'].predict(X_test_std)
+            print("Prediction: {}".format(prediction))
+            </pre></code>
+            <pre class="pre-color-after"><code>
+                Prediction: [0 1 0 0 1 0 1 0 1 0 0 0 1 0 1 1 0 0 1 1 0 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0 1
+                1 0 0 0 0 0 1 1 0 0 0 1 1 0 0 1 1 0 0 0 0 0 1 0 0 0 1 0 1 1 0 0 0 1 0 1 0
+                1 0 0 1 0 1 0 0 0 0 0 0 1 1 1 1 1 0 1 0 0 0 1 0 1 0 1 0 0 0 1 0 0 0 0 0 0
+                1 1 1 1 0 0 1 0 1 1 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0
+                0 0 1 0 0 1 0 0 1 1 0 1 1 0 1 0 0 1 0 0 1 1 0 0 0 0 0 1 1 0 1 1 0 0 1 0 1
+                0 1 0 0 0 0 0 0 0 1 0 1 1 0 1 1 1 0 1 0 0 0 0 1 0 0 0 0 1 0 0 1 0 1 0 1 0
+                1 0 1 1 0 1 0 0 0 1 0 0 0 0 0 0 1 1 1 1 0 0 0 0 1 0 1 1 1 0 0 0 0 0 0 0 1
+                0 0 0 1 1 0 0 0 0 1 0 0 0 1 0 0 1 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 1 0 0 0 0
+                1 0 0 0 0 0 0 0 1 1 0 1 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0
+                1 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 0 0 0 1 0 1 0 0 1 0 1 1 0 1 0 0 1 1 0
+                0 1 0 0 1 1 0 0 0 0 0 0 1 1 0 1 0 0 0 0 0 1 1 0 0 1 0 1 0 0 1 0 1 0 0 0 0
+                0 1 1 1 1 1 0 1 0 0 0]
+            </pre></code>
+            <pre class="pre-color"><code>
+            # 予測データの確認
+            df_prediction = pd.DataFrame(prediction)
+            df_prediction
+            </pre></code>
+            <pre class="pre-color-after"><code>                            
+                        0
+                0	0
+                1	1
+                2	0
+                3	0
+                4	1
+                ...	...
+                413	0
+                414	1
+                415	0
+                416	0
+                417	0
+                418 rows × 1 columns
+            </pre></code>
+            <pre class="pre-color"><code>
+            # パッセンジャーIDに予測データを追加する。
+            df_PassengerId = pd.DataFrame(titanic_test['PassengerId'])
+            df_PassengerId['Survived'] = prediction
+            df_PassengerId
+            </pre></code>
+            <pre class="pre-color-after"><code>           
+                    PassengerId	Survived
+                0	892	0
+                1	893	1
+                2	894	0
+                3	895	0
+                4	896	1
+                ...	...	...
+                413	1305	0
+                414	1306	1
+                415	1307	0
+                416	1308	0
+                417	1309	0
+                418 rows × 2 columns
+            </pre></code>
+            <pre class="pre-color"><code>
+            # index=Falseでindexを削除し、csv化する。
+            df_PassengerId.to_csv("submission.csv", index=False)
+            </pre></code>
 
         </div>
 
